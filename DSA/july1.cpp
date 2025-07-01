@@ -1,4 +1,5 @@
 #include <iostream>
+#include <bits/stdc++.h> 
 using namespace std;
 
 //1. Design Queue using Arrays
@@ -72,3 +73,77 @@ int main() {
     return 0;
 }
 
+//2. Next Greater Element I
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        unordered_map<int,int> map;
+        stack<int> s;
+        vector<int> ans;
+        for(int i=nums2.size()-1;i>=0;i--) {
+            while(s.size() > 0 && s.top() <= nums2[i]) {
+                s.pop();
+            }
+            if(s.empty()) {
+                //ans.push_back(-1);
+                map[nums2[i]] = -1;
+            } else {
+                //ans.push_back(s.top());
+                map[nums2[i]] = s.top();
+            }
+            s.push(nums2[i]);
+        }
+        for(int i=0;i<nums1.size();i++) {
+            ans.push_back(map[nums1[i]]);
+        }
+        return ans;
+    }
+};
+
+//3. Next Greater Element II
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        int n = nums.size();
+        stack<int> s;
+        vector<int> ans(n,0);
+        for(int i=2*n - 1;i>=0;i--) {
+            while(s.size() > 0 && nums[s.top()] <= nums[i % n]) {
+                s.pop();
+            }
+            ans[i % n] = s.empty() ? -1 : nums[s.top()];
+            s.push(i % n);
+        }
+        return ans;
+    }
+};
+
+//4. Odd Even Linked List
+//Definition for singly-linked list.
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+        if(!head || !head->next) {
+            return head;
+        }
+        ListNode* odd = head;
+        ListNode* even = head->next;
+        ListNode* start = head->next;
+        int count = 1;
+        while(even && even->next) {
+            odd->next = even->next;
+            odd = even->next;
+            even->next = odd->next;
+            even = odd->next;
+        }
+        odd->next = start;
+        return head;
+    }
+};
