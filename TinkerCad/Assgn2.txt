@@ -1,0 +1,37 @@
+//Smart Dustbin with Ultrasonic Sensor and Servo
+
+#include <Servo.h>
+
+Servo lidServo;
+
+const int trigPin = 9;
+const int echoPin = 8;
+const int servoPin = 10;
+
+void setup() {
+  lidServo.attach(servoPin);     // Connect servo to pin 10
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+}
+
+void loop() {
+  // Trigger the ultrasonic sensor
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Read the echo time
+  long duration = pulseIn(echoPin, HIGH);
+  float distance = (duration * 0.034) / 2; // Convert to cm
+
+  // Open lid if object is close
+  if (distance < 20) {
+    lidServo.write(90);   // Open lid to 90°
+  } else {
+    lidServo.write(0);    // Close lid
+  }
+
+  delay(200); // Small delay for stability
+}

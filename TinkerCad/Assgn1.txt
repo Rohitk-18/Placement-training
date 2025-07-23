@@ -1,0 +1,24 @@
+//Digital Thermometer
+
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+const int tempPin = A0;
+
+void setup() {
+  lcd.begin(16, 2);              
+  lcd.print("Temp: ");           
+}
+
+void loop() {
+  int reading = analogRead(tempPin);                
+  float voltage = reading * 5.0 / 1024.0;            
+  float tempC = (voltage - 0.5) * 100.0;             
+  lcd.setCursor(6, 0);                               
+  lcd.print(tempC);
+  lcd.print((char)223);                              
+  lcd.print("C");
+
+  delay(1000);                                       
+}
