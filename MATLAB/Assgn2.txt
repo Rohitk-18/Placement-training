@@ -1,0 +1,37 @@
+clc, clearvars;
+
+%1. Write a script that takes a number as input and prints whether it is positive, negative, or zero.
+
+num = input('Enter a number: ');
+if num > 0
+    disp('The number is positive');
+elseif num < 0
+    disp('The number is negative');
+else
+    disp('The number is zero');
+end
+
+
+%2. Using a for loop, calculate the sum of the first n natural numbers, where n is given by the user.
+
+n = input('Enter a positive integer: ');
+sum = 0;
+for i = 1:n
+    sum = sum + i;
+end
+fprintf('Sum of first %d natural numbers is %d\n', n, sum);
+
+
+%3. Matrix Operations
+
+A = [1 2 3; 4 5 6; 7 8 9];      
+A_transpose = A';               % Transpose
+A_det = det(A);                 % Determinant
+A_scaled = 5 * A;               % Multiply by 5
+
+disp('Transposed Matrix:');
+disp(A_transpose);
+fprintf('Determinant: %.2f\n', A_det);
+disp('Matrix multiplied by 5:');
+disp(A_scaled);
+
