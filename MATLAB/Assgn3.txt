@@ -1,0 +1,44 @@
+clc, clearvars;
+
+%1. Create a function circle_area(r) that takes the radius as input and returns the area and circumference.
+%Soln :
+function [area, circumference] = circle_area(r)
+% circle_area calculates the area and circumference of a circle
+% Input: r - radius of the circle
+% Output: area, circumference
+
+    area = pi * r^2;
+    circumference = 2 * pi * r;
+end
+
+
+%2. Create a vector with 20 random integers between 1 and 100. Find and display: 
+● All numbers greater than 50 
+● The number of even numbers in the vector
+%Soln :
+% Generate 20 random integers from 1 to 100
+vec = randi([1, 100], 1, 20);
+
+% Display numbers greater than 50
+disp('Numbers greater than 50:');
+disp(vec(vec > 50));
+
+% Count even numbers
+even_count = sum(mod(vec, 2) == 0);
+fprintf('Number of even elements: %d\n', even_count);
+
+
+%3. Write a loop to keep summing random numbers between 0 and 1 until the total exceeds 10. Display the number of iterations it took.
+%Soln :
+% Keep summing random numbers until total exceeds 10
+
+total = 0;
+iterations = 0;
+
+while total <= 10
+    total = total + rand();  % Add random number between 0 and 1
+    iterations = iterations + 1;
+end
+
+fprintf('It took %d iterations to exceed a total of 10.\n', iterations);
+
